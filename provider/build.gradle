@@ -1,0 +1,32 @@
+plugins {
+    id 'au.com.dius.pact' version '3.6.0-rc.0'
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
+}
+
+
+jar {
+    baseName = 'gs-actuator-service'
+    version =  '0.1.0'
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-actuator'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test',
+            'junit:junit',
+            'au.com.dius:pact-jvm-provider_2.10:2.2.1'
+
+}
+
+pact {
+    serviceProviders {
+        provider {
+            protocol ='http'
+            host = 'localhost'
+            port = 8080
+            hasPactsFromPactBroker('http://localhost:9292')
+            hasPactsFromPactBrokerWithTag('http://localhost:9292', 'INTEGRATION')
+        }
+    }
+}
