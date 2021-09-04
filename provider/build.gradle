@@ -26,6 +26,7 @@ pact {
             host = 'localhost'
             port = 8080
             hasPactsFromPactBroker('http://localhost:9292')
+            hasPactsFromPactBrokerWithTag('http://localhost:9292', 'INTEGRATION')
         }
     }
 }
